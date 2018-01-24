@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://kotlin.bintray.com/kotlinx" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.moowork.gradle:gradle-node-plugin:$gradle_node_version"
+    }
+}
+
+allprojects {
+    group 'org.jetbrains'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        jcenter()
+        maven { url "http://kotlin.bintray.com/kotlinx" }
+    }
+
+    tasks.withType(Test) {
+        testLogging {
+            showStandardStreams = true
+            events "passed", "failed"
+        }
+    }
+}

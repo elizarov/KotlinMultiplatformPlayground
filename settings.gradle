@@ -1,0 +1,5 @@
+rootProject.name = 'KotlinMultiplatformPlayground'
+
+include 'common'
+include 'jvm'
+include 'js'
