@@ -1,20 +1,22 @@
 apply plugin: 'konan'
 
 konanArtifacts {
-    // TODO: commented out due to a failed assertion in the compiler.
-    //library('native') {
-    //    srcDir 'src/main/kotlin'
-    //    srcDir project(':common').file('src/main/kotlin')
-    //    extraOpts '-Xmulti-platform'
-    //}
+    library('native') {
+        enableMultiplatform true
+    }
 
     program('native-test') {
-        srcDir 'src/main/kotlin'
         srcDir 'src/test/kotlin'
-        srcDir project(':common').file('src/test/kotlin')
-        srcDir project(':common').file('src/main/kotlin')
-        extraOpts '-tr', '-Xmulti-platform'
+        commonSourceSet 'test'
+        libraries {
+            artifact 'native'
+        }
+        extraOpts '-tr'
     }
+}
+
+dependencies {
+    expectedBy project(':common')
 }
 
 task test(dependsOn: run)
